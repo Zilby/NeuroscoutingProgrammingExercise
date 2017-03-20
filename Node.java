@@ -1,19 +1,14 @@
 
+// Our node class for our tree. Very basic and self explanatory. 
 public class Node{
 
     private int data;
-    private Node left, right;
+    private Node left, right, parent;
     
     public Node(int data){
 	this.data = data;
 	left = null;
 	right = null;
-    }
-
-    public Node(int data, Node left, Node right){
-	this.data = data;
-	this.left = left;
-	this.right = right;
     }
 
     public Node getRight(){
