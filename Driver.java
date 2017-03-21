@@ -6,6 +6,7 @@ public class Driver{
 	Scanner scan = new Scanner(System.in);
 	int i = scan.nextInt();
 	Tree t = new Tree(i);
+	//String s = t.toString();
 	System.out.println(t.toString());
     }
 }
