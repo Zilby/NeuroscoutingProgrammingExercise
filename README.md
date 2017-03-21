@@ -1,61 +1,69 @@
 # NeuroscoutingProgrammingExercise
 The generic programming exercise for Neuroscouting Spring 2017
 
-Definitions
-- neighbor: The node directly to the left or right on the same level as a certain node.
+How to run the script:
+-----------------------
+Place all the files given in the same directory.
+Install any recent version of java (if not preinstalled).
+Enter cd /path-to-file-directory/ into a terminal.
+Enter javac *.java to compile and java Driver to run. 
+Enter your desired tree size and let the program work its magic. 
 
-Problem:
-Build a tree of integers which has the following properties:
-- The root node has value 1.
-- Each node in the tree has two children.
-- The value for the children nodes is determined as follows:
--- If it's the left children, its value will be the sum of the parent's value and the parent's left neighbor's value.
-   If the parent has no left neighbor, then the child's value is the same as its parent.
--- If it's the right children, its value will be the sum of the parent's value and the parent's right neighbor's value.
-   If the parent has no right neighbor, then the child's value is the same as its parent.
+Basic rundown:
+--------------
+This is a fairly simple program, consisting of only two classes and a driver.
+These two classes are the Tree class and the Node (also often called Leaf) class. 
+Being that I did not intend to make this particular project expandable, and since
+I did not plan on interfacing with anything other than the tree and driver classes,
+I did not include any interfaces or make the node's data type generic.
 
-The program should be able to accept an input value to determine how many levels of this tree it should generate. How the program receives the input
-value is up to you (for example it could be in the command line, reading a file, with some GUI, anything really). The program should build the tree
-and then print it out. Again, how you print it is completely up to you (it could print to a file, on the console, on a window, anything!).
+The node class is essentially a struct, having only three variables (data, left ie:
+the left attached node, and right ie: the right attached node), getters, setters, and
+a rudimentary toString method. Similarly, the driver is a very small class only
+providing the basic function of asking for input and printing out the tree.
 
-Here are a couple of example trees for different input values (apologies in advance for the ascii art!):
-Input value: 1
-Tree should be: 
-1 (just the root of the tree)
+The Tree class has the meat of the code. A tree contains only a reference to its head
+and its size. The tree's constructor method requires a given size and will build the
+tree immediately when given input. buildTree(size) contains all of our code to build
+a given tree. The gist of the algorithm is that for each row of the tree, it iterates
+through all the nodes in the row creating their children (and their corresponding data
+values) and adding them to the next row. Once this has been completed, it updates the
+current row of nodes to the next and continues until the size of the tree has been met. 
 
-Input value: 2
-Tree should be:
-  1
- / \
-1   1 (Since the root doesn't have any neighbors both left and right child get the root's value)
+I briefly experimented with having parent nodes in the children and iterating through
+the tree with those, however I decided that this method was less efficient and required
+having helper methods and other headaches. The current implementation only visits each
+node once, avoids needless variables and functions and is quite short to boot. 
 
-Input value: 4
-Tree should be:
-17                1
-           /             \
-9         1               1
-       /     \         /     \
-5     1       2       2       1
-    /   \   /   \   /   \   /   \
-2  1     3 3     4 4     3 3     1
-  / \
- 1   2
-You can use any programming language you want.
+       1               
+      / \       
+     /   \      
+    /     \     
+   /       \    
+   1       1       
+  / \     / \   
+ /   \   /   \  
+ 1   2   2   1   
+/ \ / \ / \ / \ 
+1 3 3 4 4 3 3 1
 
-For your submission, we'd like to get a zipped git repository that includes the
-code for the script (you can break it up in multiple files if you want to) along
-with a README file that contains:
-- Description of how script works at a high-level, and how to compile it and run it.
-- How the code is organized (which modules do what, and their external dependencies)
-  and how control flows through the script.
-- Interesting optimizations (if any)
+The Tree's toString method actually proved equally if not more complex than its build
+method. However, it operates in a similar way. First we define how much white space we
+need to construct the tree ie: whitespace before the first number in each row,
+whitespace between each number in each row, and whitespace before each '/' in the empty
+rows. We then add our whitespace to the front and iterate through each node in a
+given row adding the data values and the whitespace between them. Once we've finished
+that, if we're at the bottom of the tree we're done, but if not we have to add the '/'s
+to each row above the next row of children. Finally, we update the current row and
+recurse until we're left with an appropriate string for our tree.
 
-The purpose of getting the git repository is we'd like to see how you work
-through a project. We're big believers of commit early, commit often, and also 
-good commit messages, and getting a glimpse into the commit history that you
-did in creating this project is very valuable to this interview. 
+Thankfully the trees we're working with are balanced and always have children, otherwise
+calculating the branches and whitespaces would have been far more challenging. However,
+since they will always have children unless at the bottom, this allowed me to streamline
+the code and make it very simple, efficient, and easy to grasp.
 
-And don't worry if you have simple commits like "fix typo" or "deleted the
-wrong files", or commits where you were testing things out or getting familiar
-with some python package, our repositories are full of those (and even more
-embarrassing things!)
+Thanks for the opportunity to work on this exercise, it was a good refresher on efficient
+tree structures!
+
+Sincerely,
+Alex Zilbersher

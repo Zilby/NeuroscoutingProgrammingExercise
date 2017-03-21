@@ -12,7 +12,7 @@ public class Tree {
     // 1 will evaluate to a size of 1
     public Tree(int size) {
 	head = new Node(1);
-	this.size = size;
+	this.size = Math.max(size, 1);
 	buildTree(size); 
     }
 
@@ -61,9 +61,6 @@ public class Tree {
     // Our helper for our toString
     private String toStringHelper(ArrayList<Node> nodes, int row){
 	String output = "";
-	if(row > size) {
-            return output;
-	}
 	// the current level from the bottom (think building/pyramid)
         int level = this.size - row;
         int lineSpaces = (int) Math.pow(2, (Math.max(level - 1, 0)));
