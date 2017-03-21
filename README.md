@@ -35,19 +35,17 @@ the tree with those, however I decided that this method was less efficient and r
 having helper methods and other headaches. The current implementation only visits each
 node once, avoids needless variables and functions and is quite short to boot. 
 
-'''
-       1               
-      / \       
-     /   \      
-    /     \     
-   /       \    
-   1       1       
-  / \     / \   
- /   \   /   \  
- 1   2   2   1   
-/ \ / \ / \ / \ 
-1 3 3 4 4 3 3 1
-'''
+>        1               
+>       / \       
+>      /   \      
+>     /     \     
+>    /       \    
+>    1       1       
+>   / \     / \   
+>  /   \   /   \  
+>  1   2   2   1   
+> / \ / \ / \ / \ 
+> 1 3 3 4 4 3 3 1
 
 The Tree's toString method actually proved equally if not more complex than its build
 method. However, it operates in a similar way. First we define how much white space we
